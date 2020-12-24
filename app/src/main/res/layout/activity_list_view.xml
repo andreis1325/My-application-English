@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:background="#F1E9D2"
     android:focusable="auto"
+    android:visibility="visible"
     tools:context=".ListView">
 
 
@@ -41,19 +42,19 @@
         app:srcCompat="@android:drawable/ic_input_add" />
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/searchPictureId"
         android:layout_width="34dp"
         android:layout_height="30dp"
-        android:layout_marginStart="15dp"
-        android:layout_marginLeft="15dp"
         android:layout_marginTop="15dp"
+        android:layout_marginEnd="41dp"
+        android:layout_marginRight="41dp"
         android:background="#F1E9D2"
         android:clickable="true"
         android:focusable="auto"
         android:longClickable="true"
         android:onClick="searchId"
         android:src="@drawable/magnifying_glass"
-        app:layout_constraintStart_toEndOf="@+id/editTextId"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
@@ -65,7 +66,7 @@
         android:layout_marginBottom="5dp"
         android:editable="true"
         android:ems="10"
-        android:hint="English"
+        android:hint="Word"
         android:inputType="textPersonName"
         android:textColor="#594830"
         android:textColorHint="#686464"
@@ -81,7 +82,7 @@
         android:layout_marginBottom="5dp"
         android:editable="true"
         android:ems="10"
-        android:hint="Russian"
+        android:hint="Translation"
         android:inputType="textPersonName"
         android:textColor="#594830"
         android:textColorHint="#686464"
@@ -97,13 +98,17 @@
         android:layout_marginTop="5dp"
         android:ems="10"
         android:hint="Search..."
+        android:imeOptions="actionDone"
         android:inputType="textPersonName"
+        android:selectAllOnFocus="false"
+        android:singleLine="false"
         android:textColor="#594830"
         android:textColorHighlight="#FF9800"
         android:textColorHint="#686464"
         android:textColorLink="#B87D26"
         android:textCursorDrawable="?android:attr/textCursorDrawable"
         android:textSize="22dp"
+        android:visibility="gone"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

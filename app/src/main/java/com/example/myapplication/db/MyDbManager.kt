@@ -5,8 +5,10 @@ import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.provider.BaseColumns
 import android.view.View
+import java.util.*
+import kotlin.collections.ArrayList
 
-class MyDbManager(context : Context) {
+ class MyDbManager(context : Context) {
     val myDbHelper = MyDbHepler(context)
     var db : SQLiteDatabase? = null
 
@@ -39,6 +41,7 @@ class MyDbManager(context : Context) {
             dataList.add(Word(eng, rus))
         }
         cursor.close()
+        Collections.reverse(dataList)
         return dataList
     }
     fun closeDb(){

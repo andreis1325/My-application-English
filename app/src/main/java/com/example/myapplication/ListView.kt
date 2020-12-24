@@ -1,40 +1,41 @@
 package com.example.myapplication
 
-import android.app.Application
-import android.content.Intent
-import android.graphics.ColorSpace
-import androidx.appcompat.app.AppCompatActivity
+import android.app.Service
+import android.content.Context
 import android.os.Bundle
+import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
-import android.view.Menu
-import android.view.MenuItem
 import android.view.View
-import android.widget.*
+import android.view.inputmethod.EditorInfo
+import android.view.inputmethod.InputMethodManager
+import android.widget.ImageView
+import android.widget.TextView
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.myapplication.db.MyDbManager
 import com.example.myapplication.db.Word
 import kotlinx.android.synthetic.main.activity_list_view.*
-import kotlinx.android.synthetic.main.item_layout.*
-import java.util.*
-import kotlin.collections.ArrayList
 
 
 class ListView : AppCompatActivity() {
     var adapter : MyAdapter? = null
     val myDbManager = MyDbManager(this)
-
+    var searchText: TextView? = null
     val arrayList = ArrayList<Word>()
+    var searchPicture : ImageView? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_list_view)
 
+        searchText = findViewById<TextView>(R.id.editTextId)
+        searchPicture = findViewById<ImageView>(R.id.searchPictureId)
+
         viewId.hasFixedSize()
         viewId.layoutManager = LinearLayoutManager(this)
         adapter = MyAdapter(arrayList, this)
         viewId.adapter = adapter
-
     }
 
     override fun onResume(){
@@ -45,6 +46,7 @@ class ListView : AppCompatActivity() {
         //arrayItem = myDbManager.readDbData()
         //adapter = MyAdapter(arrayItem, this)
         //viewId.adapter = adapter
+
     }
 
 
@@ -64,20 +66,48 @@ class ListView : AppCompatActivity() {
 
     }
 
+    //editTextId.setOnEditorActionListener( OnEditorActionListener()
     fun searchId(view:View){
 
-            var searchText = editTextId.text
-            var allItems = myDbManager.readDbData()
-            var searchedItems = ArrayList<Word>()
+        var view : View? = this.currentFocus
+        val imm: InputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
 
-            for(item in allItems){
-                if(searchText in item.eng && item.eng.indexOf(searchText.toString())==0)
-                    searchedItems.add(item)
-            }
-            adapter?.updateAdapter(searchedItems)
+        if (searchText?.visibility ==  View.GONE) {
+            searchText?.visibility = View.VISIBLE
+            imm.showSoftInput(view, 0)
+            searchPicture?.setImageResource(R.drawable.cross)
+        }
+        else{
+            searchPicture?.setImageResource(R.drawable.search)
+            searchText?.text = ""
+            searchText?.visibility = View.GONE
+            imm.hideSoftInputFromWindow(view?.windowToken,0)
         }
 
-}
+        searchText?.addTextChangedListener( object: TextWatcher{
+
+            override fun afterTextChanged(s: Editable?) {}
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int){}
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                var searchText = editTextId.text
+                var allItems = myDbManager.readDbData()
+                var searchedItems = ArrayList<Word>()
+
+                for(item in allItems){
+                    if(searchText.toString().toLowerCase() in item.eng && item.eng.indexOf(searchText.toString().toLowerCase())==0)
+                        searchedItems.add(item)
+                }
+                adapter?.updateAdapter(searchedItems)
+            }
+            }
+        )}
+    }
+
+
+
+
 
 
 
