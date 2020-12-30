@@ -71,10 +71,10 @@
 
                     <ImageView
                         android:id="@+id/vIvNextWord"
-                        android:layout_width="48dp"
-                        android:layout_height="48dp"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
                         android:layout_gravity="center"
-                        android:src="@android:drawable/ic_menu_send" />
+                        android:src="@drawable/right_arrow" />
 
                 </FrameLayout>
             </LinearLayout>
@@ -84,15 +84,15 @@
                 android:layout_width="56dp"
                 android:layout_height="56dp"
                 android:layout_gravity="center"
-                android:background="@drawable/bg_green_selector">
+                android:background="@drawable/bg_other_selector">
 
                 <ImageView
                     android:id="@+id/vIvHint"
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
                     android:layout_gravity="center"
 
-                    android:src="@android:drawable/btn_star_big_on" />
+                    android:src="@drawable/light" />
 
             </FrameLayout>
 
