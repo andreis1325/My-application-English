@@ -13,15 +13,17 @@
         android:theme="@style/Theme.MyApplication">
 
         <activity android:name=".ExtendedItem" />
-        <activity android:name=".ListView" />
-        <activity android:name=".SecondActivity">
+        <activity android:name=".ListView"  />
+        <activity android:name=".SecondActivity" android:windowSoftInputMode="adjustResize"  >
+
+
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-            android:screenOrientation="portrait"
+
         </activity>
         <activity android:name=".MainActivity" />
     </application>

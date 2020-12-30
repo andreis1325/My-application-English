@@ -8,23 +8,33 @@ import com.example.myapplication.db.MyDbManager
 import kotlinx.android.synthetic.main.activity_extended_item.*
 
 class ExtendedItem : AppCompatActivity() {
-    val myDbManager = MyDbManager(this)
-    var str = ""
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_extended_item)
 
-
-        text2Id.text = intent.getCharSequenceExtra("text")
-        str = intent.getCharSequenceExtra("text").toString()
+        initOnClickedListeners()
+        showWords()
     }
 
-    fun delete(view: View) {
+    private fun showWords(){
+        var str = intent.getCharSequenceExtra("text").toString()
+        var translate= intent.getCharSequenceExtra("translation").toString()
+        text2Id.text = translate + " - " + str
+    }
 
-        //myDbManager.openDb()
-        var num = myDbManager.del("content = "+ "'$str'")
+    private fun initOnClickedListeners(){
+        deleteItemId.setOnClickListener(){
+            onDeleteItemClicked()
+        }
+
+    }
+
+    fun onDeleteItemClicked() {
+        val myDbManager = MyDbManager(this)
+        var str =intent.getCharSequenceExtra("text").toString()
+        myDbManager.del("content = "+ "'$str'")
         Toast.makeText(this, "Deleted", Toast.LENGTH_SHORT).show()
         finish()
     }
-
 }

@@ -26,11 +26,24 @@ class MainActivity : Activity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        initOnClickListeners()
+    }
+
+    private fun initOnClickListeners(){
+
+        vIvHint.setOnClickListener(){
+            Toast.makeText(this, randomItems[itemPosition].rus, Toast.LENGTH_LONG).show()
+        }
+
+        vFlNextWord.setOnClickListener(){
+            onNextWordClicked()
+        }
     }
 
     override fun onResume() {
         super.onResume()
-       myDbManager.openDb()
+        myDbManager.openDb()
         randomItems = myDbManager.readDbData()
 
         if(myDbManager.readDbData().size==0)
@@ -40,36 +53,29 @@ class MainActivity : Activity() {
         }else{
             randomItems.shuffle()
             itemPosition = 0
-            wordId.text = randomItems[itemPosition].eng
+            vTvTestWord.text = randomItems[itemPosition].eng
         }
-
-
     }
 
-
-    fun toPrompt(view:View){
-        Toast.makeText(this, randomItems[itemPosition].rus, Toast.LENGTH_LONG).show()
-    }
-
-    fun toNextWord(view: View)
+    fun onNextWordClicked()
     {
-        if(wordId.getTag() == "false"){
-            if (answer.text.toString().toLowerCase() == randomItems[itemPosition].rus){
-                wordId.setBackgroundResource(R.drawable.radius_correct)
-                wordId.tag="true"
+        if(vTvTestWord.getTag() == "false"){
+            if (vEtAnswer.text.toString().toLowerCase() == randomItems[itemPosition].rus){
+                vTvTestWord.setBackgroundResource(R.drawable.radius_correct)
+                vTvTestWord.tag="true"
             }
             else
-                wordId.setBackgroundResource(R.drawable.radius_incorrect)
+                vTvTestWord.setBackgroundResource(R.drawable.radius_incorrect)
         }else{
-            wordId.setBackgroundResource(R.drawable.radius)
-            wordId.tag="false"
+            vTvTestWord.setBackgroundResource(R.drawable.radius)
+            vTvTestWord.tag="false"
             itemPosition++
             if(itemPosition==randomItems.size){
 
                 finish()
             }else{
-                wordId.text = randomItems[itemPosition].eng
-                answer.setText("")
+                vTvTestWord.text = randomItems[itemPosition].eng
+                vEtAnswer.setText("")
             }
         }
     }

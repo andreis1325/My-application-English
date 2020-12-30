@@ -3,8 +3,7 @@
 import android.content.ContentValues
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
-import android.provider.BaseColumns
-import android.view.View
+import android.widget.Toast
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -31,12 +30,13 @@ import kotlin.collections.ArrayList
     fun readDbData() : ArrayList<Word>{
         val dataList = ArrayList<Word>()
 
-        val cursor = db?.query(MyDbNameClass.TABLE_NAME, null, null, null,null, null, null)
+        val cursor = db?.query(MyDbNameClass.TABLE_NAME, null,  null, null,null, null, null)
 
         while(cursor?.moveToNext()!!){
 
             val eng = cursor.getString(cursor.getColumnIndex(MyDbNameClass.COLUMN_NAME_TITLE))
             val rus = cursor.getString(cursor.getColumnIndex(MyDbNameClass.COLUMN_NAME_CONTENT))
+
 
             dataList.add(Word(eng, rus))
         }

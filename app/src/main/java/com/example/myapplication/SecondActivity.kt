@@ -9,28 +9,33 @@ import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import android.widget.TextView
 import android.widget.Toast
+import kotlinx.android.synthetic.main.activity_second.*
 
 class SecondActivity : AppCompatActivity() {
-    var test: TextView? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_second)
+
+        initOnClickListeners()
     }
 
-    override fun onResume() {
-        super.onResume()
-        //val imm: InputMethodManager = this.getSystemService(Service.INPUT_METHOD_SERVICE) as InputMethodManager
-        //imm.showSoftInput(test, 0)
-
+    private fun initOnClickListeners(){
+        goToTestingButtonId.setOnClickListener(){
+            onToTestingButtonClicked()
+        }
+        goToWordListButtonId.setOnClickListener(){
+            onToListViewButtonClicked()
+        }
     }
 
-    fun toSecondActivity(view: View)
+    fun onToTestingButtonClicked()
     {
        val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
     }
 
-    fun toListView(view:View)
+    fun onToListViewButtonClicked()
     {
         val intent2 = Intent(this, ListView::class.java)
         startActivity(intent2)

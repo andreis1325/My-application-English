@@ -4,10 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="3dp">
+    android:layout_margin="3dp"
+    android:background="@color/bg_list">
 
     <TextView
-        android:id="@+id/textId"
+        android:id="@+id/vTvItemWord"
         android:layout_width="265dp"
         android:layout_height="35dp"
         android:layout_margin="5dp"
@@ -16,7 +17,7 @@
         android:layout_marginEnd="50dp"
         android:layout_marginRight="50dp"
         android:autoText="false"
-        android:background="@drawable/radius_item"
+        android:background="@drawable/bg_blue_selector"
         android:cursorVisible="false"
         android:ellipsize="middle"
         android:fontFamily="@font/font_tree"
@@ -28,7 +29,6 @@
         android:textSize="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.516"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
